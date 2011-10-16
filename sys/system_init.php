@@ -1,20 +1,12 @@
 <?php
 
-if(!isset($_SERVER["SSL_PROTOCOL"])) header("Location: https://".$_SERVER["SERVER_ADDR"].$_SERVER["REQUEST_URI"]);
-
-$mysql_hostname = "127.0.0.1";
-$mysql_username = "root";
-$mysql_password = "aurora";
-$mysql_database = "aurora";
-
-$admin_teamname = "Judge";
-$admin_password = "aurora";
+if(file_exists("sys/system_config.php")) include("sys/system_config.php"); else exit;
 
 // Include System Files
 $f=opendir("sys");
 while($e=readdir($f)){
 	if($e=="."||$e=="..") continue;
-	if(eregi("^system",$e) && file_exists("sys/$e") && $e!="system_init.php")
+	if(eregi("^system",$e) && file_exists("sys/$e") && $e!="system_init.php" && $e!="system_config.php")
 		include("sys/$e");
 	}
 closedir($f);
